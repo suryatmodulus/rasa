@@ -769,8 +769,8 @@ requests = ">=2.18"
 uritemplate = ">=3.0.0"
 
 [package.extras]
-sni = ["pyopenssl", "ndg-httpsclient", "pyasn1"]
-test = ["betamax (>=0.8.0)", "pytest (>2.3.5)", "betamax-matchers (>=0.1.0)", "unittest2 (==0.5.1)", "mock"]
+test = ["mock", "unittest2 (==0.5.1)", "betamax-matchers (>=0.1.0)", "pytest (>2.3.5)", "betamax (>=0.8.0)"]
+sni = ["pyasn1", "ndg-httpsclient", "pyopenssl"]
 
 [[package]]
 name = "gitpython"
@@ -908,8 +908,8 @@ google-crc32c = {version = ">=1.0,<2.0dev", markers = "python_version >= \"3.5\"
 six = "*"
 
 [package.extras]
-aiohttp = ["aiohttp (>=3.6.2,<4.0.0dev)"]
 requests = ["requests (>=2.18.0,<3.0.0dev)"]
+aiohttp = ["aiohttp (>=3.6.2,<4.0.0dev)"]
 
 [[package]]
 name = "googleapis-common-protos"
@@ -1214,9 +1214,9 @@ python-versions = ">=2.7"
 importlib-metadata = {version = "*", markers = "python_version < \"3.8\""}
 
 [package.extras]
-docs = ["sphinx", "jaraco.packaging (>=3.2)", "rst.linker (>=1.9)"]
-testing = ["coverage (<5)", "pytest (>=3.5,!=3.7.3)", "pytest-checkdocs (>=1.2.3)", "pytest-flake8", "pytest-black-multipy", "pytest-cov", "ecdsa", "feedparser", "numpy", "pandas", "pymongo", "sklearn", "sqlalchemy", "enum34", "jsonlib"]
-"testing.libs" = ["demjson", "simplejson", "ujson", "yajl"]
+testing = ["jsonlib", "enum34", "sqlalchemy", "sklearn", "pymongo", "pandas", "numpy", "feedparser", "ecdsa", "pytest-cov", "pytest-black-multipy", "pytest-flake8", "pytest-checkdocs (>=1.2.3)", "pytest (>=3.5,!=3.7.3)", "coverage (<5)"]
+"testing.libs" = ["yajl", "ujson", "simplejson", "demjson"]
+docs = ["rst.linker (>=1.9)", "jaraco.packaging (>=3.2)", "sphinx"]
 
 [[package]]
 name = "jsonpointer"
@@ -1292,9 +1292,9 @@ numpy = ">=1.9.1"
 six = ">=1.9.0"
 
 [package.extras]
-image = ["scipy (>=0.14)", "Pillow (>=5.2.0)"]
+tests = ["pytest-cov", "pytest-xdist", "pytest", "keras", "tensorflow", "pillow", "pandas"]
 pep8 = ["flake8"]
-tests = ["pandas", "pillow", "tensorflow", "keras", "pytest", "pytest-xdist", "pytest-cov"]
+image = ["Pillow (>=5.2.0)", "scipy (>=0.14)"]
 
 [[package]]
 name = "kiwisolver"
@@ -1435,6 +1435,7 @@ PyYAML = ">=5.1"
 requests = ">=2.5"
 responses = ">=0.9.0"
 six = ">1.9"
+sshpubkeys = {version = ">=3.1.0", markers = "python_version > \"3\""}
 werkzeug = "*"
 xmltodict = "*"
 zipp = "*"
@@ -1749,10 +1750,10 @@ smart-open = ">=2.2.0,<4.0.0"
 typer = ">=0.3.0,<1.0.0"
 
 [package.extras]
-all = ["google-cloud-storage (>=1.26.0,<2.0.0)", "boto3", "pytest", "pytest-coverage", "mock", "typer-cli"]
-gcs = ["google-cloud-storage (>=1.26.0,<2.0.0)"]
+test = ["typer-cli", "mock", "pytest-coverage", "pytest"]
 s3 = ["boto3"]
-test = ["pytest", "pytest-coverage", "mock", "typer-cli"]
+gcs = ["google-cloud-storage (>=1.26.0,<2.0.0)"]
+all = ["typer-cli", "mock", "pytest-coverage", "pytest", "boto3", "google-cloud-storage (>=1.26.0,<2.0.0)"]
 
 [[package]]
 name = "pbr"
@@ -1977,10 +1978,10 @@ python-versions = ">=3.6"
 cryptography = {version = ">=3.3.1,<4.0.0", optional = true, markers = "extra == \"crypto\""}
 
 [package.extras]
+tests = ["coverage[toml] (==5.0.4)", "pytest (>=6.0.0,<7.0.0)"]
+docs = ["zope.interface", "sphinx-rtd-theme", "sphinx"]
+dev = ["pre-commit", "mypy", "coverage[toml] (==5.0.4)", "pytest (>=6.0.0,<7.0.0)", "cryptography (>=3.3.1,<4.0.0)", "zope.interface", "sphinx-rtd-theme", "sphinx"]
 crypto = ["cryptography (>=3.3.1,<4.0.0)"]
-dev = ["sphinx", "sphinx-rtd-theme", "zope.interface", "cryptography (>=3.3.1,<4.0.0)", "pytest (>=6.0.0,<7.0.0)", "coverage[toml] (==5.0.4)", "mypy", "pre-commit"]
-docs = ["sphinx", "sphinx-rtd-theme", "zope.interface"]
-tests = ["pytest (>=6.0.0,<7.0.0)", "coverage[toml] (==5.0.4)"]
 
 [[package]]
 name = "pykwalify"
@@ -2192,21 +2193,20 @@ client = ["requests (>=2.21.0)", "websocket-client (>=0.54.0)"]
 
 [[package]]
 name = "python-jose"
-version = "3.2.0"
+version = "3.3.0"
 description = "JOSE implementation in Python"
 category = "dev"
 optional = false
 python-versions = "*"
 
 [package.dependencies]
-cryptography = {version = "*", optional = true, markers = "extra == \"cryptography\""}
-ecdsa = "<0.15"
+cryptography = {version = ">=3.4.0", optional = true, markers = "extra == \"cryptography\""}
+ecdsa = "!=0.15"
 pyasn1 = "*"
 rsa = "*"
-six = "<2.0"
 
 [package.extras]
-cryptography = ["cryptography"]
+cryptography = ["cryptography (>=3.4.0)"]
 pycrypto = ["pycrypto (>=2.6.0,<2.7.0)", "pyasn1"]
 pycryptodome = ["pycryptodome (>=3.3.1,<4.0.0)", "pyasn1"]
 
@@ -2565,20 +2565,20 @@ certifi = "*"
 urllib3 = ">=1.10.0"
 
 [package.extras]
-aiohttp = ["aiohttp (>=3.5)"]
-beam = ["apache-beam (>=2.12)"]
-bottle = ["bottle (>=0.12.13)"]
-celery = ["celery (>=3)"]
-chalice = ["chalice (>=1.16.0)"]
-django = ["django (>=1.8)"]
-falcon = ["falcon (>=1.4)"]
-flask = ["flask (>=0.11)", "blinker (>=1.1)"]
-pure_eval = ["pure-eval", "executing", "asttokens"]
-pyspark = ["pyspark (>=2.4.4)"]
-rq = ["rq (>=0.6)"]
-sanic = ["sanic (>=0.8)"]
-sqlalchemy = ["sqlalchemy (>=1.2)"]
 tornado = ["tornado (>=5)"]
+sqlalchemy = ["sqlalchemy (>=1.2)"]
+sanic = ["sanic (>=0.8)"]
+rq = ["rq (>=0.6)"]
+pyspark = ["pyspark (>=2.4.4)"]
+pure_eval = ["asttokens", "executing", "pure-eval"]
+flask = ["blinker (>=1.1)", "flask (>=0.11)"]
+falcon = ["falcon (>=1.4)"]
+django = ["django (>=1.8)"]
+chalice = ["chalice (>=1.16.0)"]
+celery = ["celery (>=3)"]
+bottle = ["bottle (>=0.12.13)"]
+beam = ["apache-beam (>=2.12)"]
+aiohttp = ["aiohttp (>=3.5)"]
 
 [[package]]
 name = "six"
@@ -2756,6 +2756,21 @@ python-versions = ">=3.6"
 catalogue = ">=2.0.1,<2.1.0"
 
 [[package]]
+name = "sshpubkeys"
+version = "3.3.1"
+description = "SSH public key parser"
+category = "dev"
+optional = false
+python-versions = ">=3"
+
+[package.dependencies]
+cryptography = ">=2.1.4"
+ecdsa = ">=0.13"
+
+[package.extras]
+dev = ["twine", "wheel", "yapf"]
+
+[[package]]
 name = "stevedore"
 version = "3.3.0"
 description = "Manage dynamic plugins for Python applications"
@@ -2842,19 +2857,20 @@ wrapt = ">=1.11.1"
 
 [[package]]
 name = "tensorflow-addons"
-version = "0.12.1"
+version = "0.17.1"
 description = "TensorFlow Addons."
 category = "main"
 optional = false
 python-versions = "*"
 
 [package.dependencies]
+packaging = "*"
 typeguard = ">=2.7"
 
 [package.extras]
-tensorflow = ["tensorflow (>=2.3.0,<2.5.0)"]
-tensorflow-cpu = ["tensorflow-cpu (>=2.3.0,<2.5.0)"]
-tensorflow-gpu = ["tensorflow-gpu (>=2.3.0,<2.5.0)"]
+tensorflow = ["tensorflow (>=2.7.0,<2.10.0)"]
+tensorflow-cpu = ["tensorflow-cpu (>=2.7.0,<2.10.0)"]
+tensorflow-gpu = ["tensorflow-gpu (>=2.7.0,<2.10.0)"]
 
 [[package]]
 name = "tensorflow-estimator"
@@ -2877,8 +2893,8 @@ numpy = ">=1.12.0"
 protobuf = ">=3.8.0"
 
 [package.extras]
+make_nearest_neighbour_index = ["annoy", "apache-beam"]
 make_image_classifier = ["keras-preprocessing"]
-make_nearest_neighbour_index = ["apache-beam", "annoy"]
 
 [[package]]
 name = "tensorflow-probability"
@@ -2912,8 +2928,8 @@ python-versions = "*"
 tensorflow = ">=2.3.0,<2.4"
 
 [package.extras]
+tests = ["pytest", "absl-py"]
 tensorflow_gpu = ["tensorflow-gpu (>=2.1.0,<2.2)"]
-tests = ["absl-py", "pytest"]
 
 [[package]]
 name = "termcolor"
@@ -3103,10 +3119,10 @@ python-versions = ">=3.6"
 click = ">=7.1.1,<7.2.0"
 
 [package.extras]
-test = ["pytest-xdist (>=1.32.0,<2.0.0)", "pytest-sugar (>=0.9.4,<0.10.0)", "mypy (==0.782)", "black (>=19.10b0,<20.0b0)", "isort (>=5.0.6,<6.0.0)", "shellingham (>=1.3.0,<2.0.0)", "pytest (>=4.4.0,<5.4.0)", "pytest-cov (>=2.10.0,<3.0.0)", "coverage (>=5.2,<6.0)"]
-all = ["colorama (>=0.4.3,<0.5.0)", "shellingham (>=1.3.0,<2.0.0)"]
-dev = ["autoflake (>=1.3.1,<2.0.0)", "flake8 (>=3.8.3,<4.0.0)"]
-doc = ["mkdocs (>=1.1.2,<2.0.0)", "mkdocs-material (>=5.4.0,<6.0.0)", "markdown-include (>=0.5.1,<0.6.0)"]
+test = ["isort (>=5.0.6,<6.0.0)", "black (>=19.10b0,<20.0b0)", "mypy (==0.782)", "pytest-sugar (>=0.9.4,<0.10.0)", "pytest-xdist (>=1.32.0,<2.0.0)", "coverage (>=5.2,<6.0)", "pytest-cov (>=2.10.0,<3.0.0)", "pytest (>=4.4.0,<5.4.0)", "shellingham (>=1.3.0,<2.0.0)"]
+doc = ["markdown-include (>=0.5.1,<0.6.0)", "mkdocs-material (>=5.4.0,<6.0.0)", "mkdocs (>=1.1.2,<2.0.0)"]
+dev = ["flake8 (>=3.8.3,<4.0.0)", "autoflake (>=1.3.1,<2.0.0)"]
+all = ["shellingham (>=1.3.0,<2.0.0)", "colorama (>=0.4.3,<0.5.0)"]
 
 [[package]]
 name = "typing-extensions"
@@ -3181,7 +3197,7 @@ optional = false
 python-versions = ">=3.6"
 
 [package.extras]
-watchmedo = ["PyYAML (>=3.10)", "argh (>=0.24.1)"]
+watchmedo = ["argh (>=0.24.1)", "PyYAML (>=3.10)"]
 
 [[package]]
 name = "wcwidth"
@@ -3286,7 +3302,7 @@ transformers = ["transformers"]
 [metadata]
 lock-version = "1.1"
 python-versions = ">=3.6,<3.9"
-content-hash = "b6a5109dfc4ffe9ff486532bf2803c948e7b0a03c52f6a27411218bf8c8899b2"
+content-hash = "d394ac2982c92f10583c455488563b1be16bedd15fc721e1be7d2551513928a3"
 
 [metadata.files]
 absl-py = [
@@ -3604,8 +3620,10 @@ cryptography = [
     {file = "cryptography-3.4.7-cp36-abi3-win_amd64.whl", hash = "sha256:de4e5f7f68220d92b7637fc99847475b59154b7a1b3868fb7385337af54ac9ca"},
     {file = "cryptography-3.4.7-pp36-pypy36_pp73-manylinux2010_x86_64.whl", hash = "sha256:26965837447f9c82f1855e0bc8bc4fb910240b6e0d16a664bb722df3b5b06873"},
     {file = "cryptography-3.4.7-pp36-pypy36_pp73-manylinux2014_x86_64.whl", hash = "sha256:eb8cc2afe8b05acbd84a43905832ec78e7b3873fb124ca190f574dca7389a87d"},
+    {file = "cryptography-3.4.7-pp37-pypy37_pp73-macosx_10_10_x86_64.whl", hash = "sha256:b01fd6f2737816cb1e08ed4807ae194404790eac7ad030b34f2ce72b332f5586"},
     {file = "cryptography-3.4.7-pp37-pypy37_pp73-manylinux2010_x86_64.whl", hash = "sha256:7ec5d3b029f5fa2b179325908b9cd93db28ab7b85bb6c1db56b10e0b54235177"},
     {file = "cryptography-3.4.7-pp37-pypy37_pp73-manylinux2014_x86_64.whl", hash = "sha256:ee77aa129f481be46f8d92a1a7db57269a2f23052d5f2433b4621bb457081cc9"},
+    {file = "cryptography-3.4.7-pp37-pypy37_pp73-win_amd64.whl", hash = "sha256:bf40af59ca2465b24e54f671b2de2c59257ddc4f7e5706dbd6930e26823668d3"},
     {file = "cryptography-3.4.7.tar.gz", hash = "sha256:3d10de8116d25649631977cb37da6cbdd2d6fa0e0281d014a5b7d337255ca713"},
 ]
 cycler = [
@@ -3641,6 +3659,11 @@ deprecated = [
 ]
 dm-tree = [
     {file = "dm-tree-0.1.6.tar.gz", hash = "sha256:6776404b23b4522c01012ffb314632aba092c9541577004ab153321e87da439a"},
+    {file = "dm_tree-0.1.6-cp310-cp310-macosx_10_9_universal2.whl", hash = "sha256:c6185d750ae7078d299262d16f0b8f2ba699a498abc8fe0e213817763796dd5f"},
+    {file = "dm_tree-0.1.6-cp310-cp310-macosx_10_9_x86_64.whl", hash = "sha256:51d3584b6f5c1d2d6f1fbdf3286d92313ecef894294cda3bcf35e49366d135b6"},
+    {file = "dm_tree-0.1.6-cp310-cp310-macosx_11_0_arm64.whl", hash = "sha256:d6780c9bf3f9d388706cf02efd0866c94c85b5330c92a0989bddfdd9878cd0e8"},
+    {file = "dm_tree-0.1.6-cp310-cp310-manylinux_2_12_x86_64.manylinux2010_x86_64.whl", hash = "sha256:91b895194a1ffc5453d27137c10f03cf9422e43ecb5c1d533f7a24eb46c71143"},
+    {file = "dm_tree-0.1.6-cp310-cp310-win_amd64.whl", hash = "sha256:0f8a43ec475776a4e7091ef0ae01e8328f3817f723640a90d31c7acc07e830f7"},
     {file = "dm_tree-0.1.6-cp36-cp36m-macosx_10_14_x86_64.whl", hash = "sha256:a8814a5c838f79e9db22a51369c74f4d92e7f1485ec55d7f665ae4d98478cb4f"},
     {file = "dm_tree-0.1.6-cp36-cp36m-manylinux2014_x86_64.whl", hash = "sha256:e28ba91d3d97230b831716db401ce116ae5c7dcd025161ac16ecb8bd5c870a85"},
     {file = "dm_tree-0.1.6-cp36-cp36m-manylinux_2_24_x86_64.whl", hash = "sha256:603392f1a7818a4f43a7033c2061ae7c2085a4a728171b0bbca76bd107fcdfb0"},
@@ -3650,10 +3673,14 @@ dm-tree = [
     {file = "dm_tree-0.1.6-cp37-cp37m-manylinux_2_24_x86_64.whl", hash = "sha256:c4e8d868fc9a75cbdb67e78069b33e62a4c69bc182c1d2adc29ab08e283912d8"},
     {file = "dm_tree-0.1.6-cp37-cp37m-win_amd64.whl", hash = "sha256:6d5f64d89f657b11f429e13b1378c8cfbe4baef50e7ab31f3689bfe0cf4a2508"},
     {file = "dm_tree-0.1.6-cp38-cp38-macosx_10_14_x86_64.whl", hash = "sha256:8d59c5098456667b28c607110537c86c25cbd0ee455f21d033c60ef2d7f48d81"},
+    {file = "dm_tree-0.1.6-cp38-cp38-macosx_10_9_universal2.whl", hash = "sha256:ec003873d759635ba6cc5eabc6da886bc00f6b5ec23a6baffc4fd0218231adad"},
+    {file = "dm_tree-0.1.6-cp38-cp38-macosx_11_0_arm64.whl", hash = "sha256:a69861be3f2e6d55a86c280e9625ddd9a77f0c9c9936075ad7773bfdfdca70a3"},
     {file = "dm_tree-0.1.6-cp38-cp38-manylinux2014_x86_64.whl", hash = "sha256:f3bec40e658fe7546c3a56849c743ac9a498e620b3236e82e171801938a56679"},
     {file = "dm_tree-0.1.6-cp38-cp38-manylinux_2_24_x86_64.whl", hash = "sha256:e87d06478356a2d92c3940dedebcd92a14ad37fba10ebb1839c8140693b83c0a"},
     {file = "dm_tree-0.1.6-cp38-cp38-win_amd64.whl", hash = "sha256:02ffa673f20b1756dcf085ef2c354bc59416d843b384c7b71c421f873ffc36c0"},
     {file = "dm_tree-0.1.6-cp39-cp39-macosx_10_14_x86_64.whl", hash = "sha256:affc7a6d29442a143c60efb2f03bcb95424d4fe6168f3d31de892c1e601fa0e6"},
+    {file = "dm_tree-0.1.6-cp39-cp39-macosx_10_9_universal2.whl", hash = "sha256:3d02ba486c8768dcb7c2164fa09af118526df9caf71833927d43da9efc1880f9"},
+    {file = "dm_tree-0.1.6-cp39-cp39-macosx_11_0_arm64.whl", hash = "sha256:e86ae05b002e825680a5da0602376da95caed24ecc54569891cfd3b1503e6786"},
     {file = "dm_tree-0.1.6-cp39-cp39-manylinux2014_x86_64.whl", hash = "sha256:bd347c74254ba320d57b0e102558c1189e3b4ae1bae952f9aef156b5914567c8"},
     {file = "dm_tree-0.1.6-cp39-cp39-manylinux_2_24_x86_64.whl", hash = "sha256:8425454192e954692d9a1e0f7b374b3b7030916b17b6055951dc17d58b6fe1b8"},
     {file = "dm_tree-0.1.6-cp39-cp39-win_amd64.whl", hash = "sha256:5269183f80f1ae37543a2a30a8f78e4b0460d5da74fb5ac42dc8a476ef8d707e"},
@@ -4037,14 +4064,18 @@ kiwisolver = [
     {file = "kiwisolver-1.3.1-cp37-cp37m-manylinux2014_ppc64le.whl", hash = "sha256:1e1bc12fb773a7b2ffdeb8380609f4f8064777877b2225dec3da711b421fda31"},
     {file = "kiwisolver-1.3.1-cp37-cp37m-win32.whl", hash = "sha256:72c99e39d005b793fb7d3d4e660aed6b6281b502e8c1eaf8ee8346023c8e03bc"},
     {file = "kiwisolver-1.3.1-cp37-cp37m-win_amd64.whl", hash = "sha256:8be8d84b7d4f2ba4ffff3665bcd0211318aa632395a1a41553250484a871d454"},
+    {file = "kiwisolver-1.3.1-cp38-cp38-macosx_10_9_universal2.whl", hash = "sha256:24cc411232d14c8abafbd0dddb83e1a4f54d77770b53db72edcfe1d611b3bf11"},
     {file = "kiwisolver-1.3.1-cp38-cp38-macosx_10_9_x86_64.whl", hash = "sha256:31dfd2ac56edc0ff9ac295193eeaea1c0c923c0355bf948fbd99ed6018010b72"},
+    {file = "kiwisolver-1.3.1-cp38-cp38-macosx_11_0_arm64.whl", hash = "sha256:ef6eefcf3944e75508cdfa513c06cf80bafd7d179e14c1334ebdca9ebb8c2c66"},
     {file = "kiwisolver-1.3.1-cp38-cp38-manylinux1_i686.whl", hash = "sha256:563c649cfdef27d081c84e72a03b48ea9408c16657500c312575ae9d9f7bc1c3"},
     {file = "kiwisolver-1.3.1-cp38-cp38-manylinux1_x86_64.whl", hash = "sha256:78751b33595f7f9511952e7e60ce858c6d64db2e062afb325985ddbd34b5c131"},
     {file = "kiwisolver-1.3.1-cp38-cp38-manylinux2014_aarch64.whl", hash = "sha256:a357fd4f15ee49b4a98b44ec23a34a95f1e00292a139d6015c11f55774ef10de"},
     {file = "kiwisolver-1.3.1-cp38-cp38-manylinux2014_ppc64le.whl", hash = "sha256:5989db3b3b34b76c09253deeaf7fbc2707616f130e166996606c284395da3f18"},
     {file = "kiwisolver-1.3.1-cp38-cp38-win32.whl", hash = "sha256:c08e95114951dc2090c4a630c2385bef681cacf12636fb0241accdc6b303fd81"},
     {file = "kiwisolver-1.3.1-cp38-cp38-win_amd64.whl", hash = "sha256:44a62e24d9b01ba94ae7a4a6c3fb215dc4af1dde817e7498d901e229aaf50e4e"},
+    {file = "kiwisolver-1.3.1-cp39-cp39-macosx_10_9_universal2.whl", hash = "sha256:6d9d8d9b31aa8c2d80a690693aebd8b5e2b7a45ab065bb78f1609995d2c79240"},
     {file = "kiwisolver-1.3.1-cp39-cp39-macosx_10_9_x86_64.whl", hash = "sha256:50af681a36b2a1dee1d3c169ade9fdc59207d3c31e522519181e12f1b3ba7000"},
+    {file = "kiwisolver-1.3.1-cp39-cp39-macosx_11_0_arm64.whl", hash = "sha256:792e69140828babe9649de583e1a03a0f2ff39918a71782c76b3c683a67c6dfd"},
     {file = "kiwisolver-1.3.1-cp39-cp39-manylinux1_i686.whl", hash = "sha256:a53d27d0c2a0ebd07e395e56a1fbdf75ffedc4a05943daf472af163413ce9598"},
     {file = "kiwisolver-1.3.1-cp39-cp39-manylinux1_x86_64.whl", hash = "sha256:834ee27348c4aefc20b479335fd422a2c69db55f7d9ab61721ac8cd83eb78882"},
     {file = "kiwisolver-1.3.1-cp39-cp39-manylinux2014_aarch64.whl", hash = "sha256:5c3e6455341008a054cccee8c5d24481bcfe1acdbc9add30aa95798e95c65621"},
@@ -4054,6 +4085,7 @@ kiwisolver = [
     {file = "kiwisolver-1.3.1-pp36-pypy36_pp73-macosx_10_9_x86_64.whl", hash = "sha256:0cd53f403202159b44528498de18f9285b04482bab2a6fc3f5dd8dbb9352e30d"},
     {file = "kiwisolver-1.3.1-pp36-pypy36_pp73-manylinux2010_x86_64.whl", hash = "sha256:33449715e0101e4d34f64990352bce4095c8bf13bed1b390773fc0a7295967b3"},
     {file = "kiwisolver-1.3.1-pp36-pypy36_pp73-win32.whl", hash = "sha256:401a2e9afa8588589775fe34fc22d918ae839aaaf0c0e96441c0fdbce6d8ebe6"},
+    {file = "kiwisolver-1.3.1-pp37-pypy37_pp73-macosx_10_9_x86_64.whl", hash = "sha256:d6563ccd46b645e966b400bb8a95d3457ca6cf3bba1e908f9e0927901dfebeb1"},
     {file = "kiwisolver-1.3.1.tar.gz", hash = "sha256:950a199911a8d94683a6b10321f9345d5a3a8433ec58b217ace979e18f16e248"},
 ]
 markdown = [
@@ -4728,8 +4760,8 @@ python-engineio = [
     {file = "python_engineio-4.2.0-py2.py3-none-any.whl", hash = "sha256:c6c119c2039fcb6f64d260211ca92c0c61b2b888a28678732a961f2aaebcc848"},
 ]
 python-jose = [
-    {file = "python-jose-3.2.0.tar.gz", hash = "sha256:4e4192402e100b5fb09de5a8ea6bcc39c36ad4526341c123d401e2561720335b"},
-    {file = "python_jose-3.2.0-py2.py3-none-any.whl", hash = "sha256:67d7dfff599df676b04a996520d9be90d6cdb7e6dd10b4c7cacc0c3e2e92f2be"},
+    {file = "python-jose-3.3.0.tar.gz", hash = "sha256:55779b5e6ad599c6336191246e95eb2293a9ddebd555f796a65f838f07e5d78a"},
+    {file = "python_jose-3.3.0-py2.py3-none-any.whl", hash = "sha256:9b1376b023f8b298536eedd47ae1089bcdb848f1535ab30555cd92002d78923a"},
 ]
 python-socketio = [
     {file = "python-socketio-5.3.0.tar.gz", hash = "sha256:3dcc9785aaeef3a9eeb36c3818095662342744bdcdabd050fe697cdb826a1c2b"},
@@ -5125,6 +5157,10 @@ srsly = [
     {file = "srsly-2.4.1-cp39-cp39-win_amd64.whl", hash = "sha256:869fdcf664edf20cd374cf1add869d67960061276478025a5887e080d8f99e1c"},
     {file = "srsly-2.4.1.tar.gz", hash = "sha256:b0f2aec0a329e6e7e742a0a60e99a74968ca29be71f35c5c4de221e328176926"},
 ]
+sshpubkeys = [
+    {file = "sshpubkeys-3.3.1-py2.py3-none-any.whl", hash = "sha256:946f76b8fe86704b0e7c56a00d80294e39bc2305999844f079a217885060b1ac"},
+    {file = "sshpubkeys-3.3.1.tar.gz", hash = "sha256:3020ed4f8c846849299370fbe98ff4157b0ccc1accec105e07cfa9ae4bb55064"},
+]
 stevedore = [
     {file = "stevedore-3.3.0-py3-none-any.whl", hash = "sha256:50d7b78fbaf0d04cd62411188fa7eedcb03eb7f4c4b37005615ceebe582aa82a"},
     {file = "stevedore-3.3.0.tar.gz", hash = "sha256:3a5bbd0652bf552748871eaa73a4a8dc2899786bc497a2aa1fcb4dcdb0debeee"},
@@ -5156,15 +5192,21 @@ tensorflow = [
     {file = "tensorflow-2.3.2-cp38-cp38-win_amd64.whl", hash = "sha256:9bd01d95243d3023afbe3df3298fdc55db3e05d48ba606000d679d54702b20c8"},
 ]
 tensorflow-addons = [
-    {file = "tensorflow_addons-0.12.1-cp36-cp36m-macosx_10_13_x86_64.whl", hash = "sha256:55b15a22fe03d8c71e899d94738dce538874af0f6e525b9779159b4679dc77e5"},
-    {file = "tensorflow_addons-0.12.1-cp36-cp36m-manylinux2010_x86_64.whl", hash = "sha256:57b177a62293159c108d99b51a121b721d44d92c780ef5db73ba41d016ff79ea"},
-    {file = "tensorflow_addons-0.12.1-cp36-cp36m-win_amd64.whl", hash = "sha256:6928f581cfd2e7c20aa7c5cc956245fe99b0b40ba7990ec122ec25f14736a22d"},
-    {file = "tensorflow_addons-0.12.1-cp37-cp37m-macosx_10_13_x86_64.whl", hash = "sha256:8dc515f5ad86fba843ba75a9251b70d8055b86be54094019bdac340b33e0c3f0"},
-    {file = "tensorflow_addons-0.12.1-cp37-cp37m-manylinux2010_x86_64.whl", hash = "sha256:ba3f4d17c971e997ba8b1a8a97fa8bd86190f32f297179ed28905e71936ff5ec"},
-    {file = "tensorflow_addons-0.12.1-cp37-cp37m-win_amd64.whl", hash = "sha256:259233e45494354b25c1e45581f0ff7a99e50a38256b353b25113f971c4d364b"},
-    {file = "tensorflow_addons-0.12.1-cp38-cp38-macosx_10_13_x86_64.whl", hash = "sha256:4203a481e2afe328473dd04f26dfd3502ee5731c2a8c5340a472e2a9ca982584"},
-    {file = "tensorflow_addons-0.12.1-cp38-cp38-manylinux2010_x86_64.whl", hash = "sha256:288919ec1debf0bc56357fc1db6dccd27389d446b214042cd4de39d7edabdad6"},
-    {file = "tensorflow_addons-0.12.1-cp38-cp38-win_amd64.whl", hash = "sha256:425e8dbe1f14397c80635f2ba316472270258f682869b8f8040e9b3d5c87b0b2"},
+    {file = "tensorflow_addons-0.17.1-cp310-cp310-macosx_10_15_x86_64.whl", hash = "sha256:51f4679fac03d668777634d4cd30a5fc5d72b2a58af94824a83cd37343ed90e7"},
+    {file = "tensorflow_addons-0.17.1-cp310-cp310-macosx_11_0_arm64.whl", hash = "sha256:af8c1b0eade2c12c9007f24d30d75711f3313e500171a7d471c10a336e0dc68b"},
+    {file = "tensorflow_addons-0.17.1-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:e9648b5fb937f19d015946fc6f607de525105ead78afbc7acfe9db3cf4a42ee4"},
+    {file = "tensorflow_addons-0.17.1-cp310-cp310-win_amd64.whl", hash = "sha256:2a652ff30e1bae50c5d740c340705a110ad82d4df2f729a48a7324d710e3a8ac"},
+    {file = "tensorflow_addons-0.17.1-cp37-cp37m-macosx_10_15_x86_64.whl", hash = "sha256:e526633dd5ecb64bc7f2b0b02d056723e7001a01d57f5017ec75baed838b0763"},
+    {file = "tensorflow_addons-0.17.1-cp37-cp37m-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:42aa05ddd2512395de50ba8c9f6f3694e1afc6f913d040161ad758123aaf9959"},
+    {file = "tensorflow_addons-0.17.1-cp37-cp37m-win_amd64.whl", hash = "sha256:be5dd587ee9a6db5739a6e87fef4cfc1e894987666c6688985f41d1016bb5c11"},
+    {file = "tensorflow_addons-0.17.1-cp38-cp38-macosx_10_15_x86_64.whl", hash = "sha256:4b05a73e1434c53027a5dc9f8448ec1361e3fc998783e86b0286f5acc5a1872d"},
+    {file = "tensorflow_addons-0.17.1-cp38-cp38-macosx_11_0_arm64.whl", hash = "sha256:17d8ed3ccf4ae47e2f2ac21a4159d2a50e065f374cb7eccd3469c8e4aa03d3c0"},
+    {file = "tensorflow_addons-0.17.1-cp38-cp38-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:de49693b488e4c616bf9c942c5af22f165837de85cf930f18fe8196525aa9e97"},
+    {file = "tensorflow_addons-0.17.1-cp38-cp38-win_amd64.whl", hash = "sha256:f884097d6fedb3e7d300d28dc633431303a1dbb7a6d91c442d7aef0b36a5c2c7"},
+    {file = "tensorflow_addons-0.17.1-cp39-cp39-macosx_10_15_x86_64.whl", hash = "sha256:7bb1ba28a94ed58da783e4752ffb7bd9b309bdd7d20c26a0bfaae25c7858e97a"},
+    {file = "tensorflow_addons-0.17.1-cp39-cp39-macosx_11_0_arm64.whl", hash = "sha256:2265a0bf3728c8f729eef9c9524fa86d3091a6b3f85c0c23d2e26564b58d4dba"},
+    {file = "tensorflow_addons-0.17.1-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:8049e8687e4ff4f1db3022e00b03c655f483e983cb42b3dcc68b2d89c8788302"},
+    {file = "tensorflow_addons-0.17.1-cp39-cp39-win_amd64.whl", hash = "sha256:de36d011e79ff86413265a3656cba23d75b741bd5f6817e43674c731d059e6b8"},
 ]
 tensorflow-estimator = [
     {file = "tensorflow_estimator-2.3.0-py2.py3-none-any.whl", hash = "sha256:b75e034300ccb169403cf2695adf3368da68863aeb0c14c3760064c713d5c486"},
